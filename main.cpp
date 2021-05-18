@@ -5,18 +5,18 @@ using namespace std;
 
 int main() {
     ifstream file;
-    file.open("number.txt");
+    string res = "";
+    file.open( "/home/maksim/PycharmProjects/pythonProject1/num.txt");
     if(file.is_open()) {
         string s;
-        getline(file,s);
+        //getline(file,s);
+        //file.getline(s);
+        file >> s;
         cout << s << endl;
-        string res;
+        cout << s.size() << endl;
         for(int i = 0; i < s.size(); i++)
         {
-            cout << s[i] - '0' + '0' << " " << i << endl;
-        }
-        for(int i = 0; i < s.size(); i++)
-        {
+            cout << i <<": " <<s[i] -'0' + '0'<< endl;
             if( (s[i] - '0' + '0') == -48)
             {
                 continue;
@@ -42,5 +42,16 @@ int main() {
     else
         cout << "File not open";
     file.close();
+    ofstream fileout;
+    fileout.open("/home/maksim/PycharmProjects/pythonProject1/num.txt");
+    if(fileout.is_open())
+    {
+        fileout << res;
+    }
+    else
+        cout << "File nit open";
+    fileout.close();
     return 0;
 }
+
+//АВЕКМНОРСТУХ

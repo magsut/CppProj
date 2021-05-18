@@ -55,7 +55,7 @@ def user_reg(message):
     f.close()
     client.send_message(message.from_user.id, f"Введённый номер: {message.text}"+"\nПодождите несколько секунд")
 
-    os.startfile('main.exe')
+    os.startfile('main')
     time.sleep(1)
     p = open('num.txt', 'r', encoding="utf-8")
     x = p.readline()
@@ -63,7 +63,7 @@ def user_reg(message):
 
     y = (r'https://auto.ru/history/' + x + '/')
 
-    chromedriver = 'chromedriver.exe'
+    chromedriver = 'chromedriver'
     options = webdriver.ChromeOptions()
     #options.add_argument('headless')
 
