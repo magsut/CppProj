@@ -6,6 +6,7 @@ import time
 from telebot import types
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import subprocess, sys
 
 client = telebot.TeleBot('1740824140:AAEZ69Kzlg1K93K-Rt9gQrVp7tDUXfr1z8U')
 
@@ -55,7 +56,12 @@ def user_reg(message):
     f.close()
     client.send_message(message.from_user.id, f"Введённый номер: {message.text}"+"\nПодождите несколько секунд")
 
-    os.startfile('main')
+    #opener = "open" if sys.platform == "darwin" else "xdg-open"
+    #mama = '/home/maksim/PycharmProjects/pythonProject1/mama'
+
+    subprocess.run('./mama')
+
+    #subprocess.call([opener, mama])
     time.sleep(1)
     p = open('num.txt', 'r', encoding="utf-8")
     x = p.readline()
@@ -63,7 +69,7 @@ def user_reg(message):
 
     y = (r'https://auto.ru/history/' + x + '/')
 
-    chromedriver = 'chromedriver'
+    chromedriver = '/home/maksim/PycharmProjects/pythonProject1/chromedriver'
     options = webdriver.ChromeOptions()
     #options.add_argument('headless')
 
