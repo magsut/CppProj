@@ -10,7 +10,7 @@ bool isAPossibleRegion(int &n);
 int main() {
     ifstream file;
     string res = "";
-    file.open("/home/maksim/PycharmProjects/pythonProject1/num.txt");
+    file.open(R"(C:\Users\maksi\Desktop\pythonProject1\num.txt)");
     if(file.is_open()) {
         string s;
         file >> s;
@@ -58,7 +58,7 @@ int main() {
     file.close();
     if(isANumber(res)) {
         ofstream fileout;
-        fileout.open("/home/maksim/PycharmProjects/pythonProject1/num.txt");
+        fileout.open(R"(C:\Users\maksi\Desktop\pythonProject1\num.txt)");
         if(fileout.is_open()) {
             fileout << res;
         } else
@@ -66,7 +66,7 @@ int main() {
         fileout.close();
     } else {
         ofstream fileout;
-        fileout.open("/home/maksim/PycharmProjects/pythonProject1/num.txt");
+        fileout.open(R"(C:\Users\maksi\Desktop\pythonProject1\num.txt)");
         if(fileout.is_open()) {
             fileout << "Invalid number";
         } else
@@ -95,7 +95,7 @@ bool isANumber(string &n)
 
 bool isCharAPossible(char &c)
 {
-    char possibleSymbols[12] = {'A','B','E','K','M','H','O','T','Y','X'};
+    char possibleSymbols[12] = {'A','B','E','K','M','H','O','P','C','T','Y','X'};
     for(int i = 0; i < 12; i++)
     {
         if(c == possibleSymbols[i]){
@@ -109,7 +109,7 @@ bool isAPossibleRegion(int &n)
 {
  int possibleRegions[42] = {102,113,116,121,122,123,124,125,126,134,136,138,142,147,150,152,154156,159,161,163,164,173,174,177,
                           178,186,190,193,196,197,198,199,702,750,716,761,763,774,777,790,797,799};
- if(n >0 && n < 10){
+ if(n >0 && n < 100){
      return true;
  } else{
      for(int possibleRegion : possibleRegions)
@@ -121,5 +121,3 @@ bool isAPossibleRegion(int &n)
  }
     return false;
 }
-
-//АВЕКМНОРСТУХавекмнорстух
