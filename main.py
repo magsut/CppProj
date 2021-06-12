@@ -60,28 +60,30 @@ def user_reg(message):
     p = open('num.txt', 'r', encoding="utf-8")
     x = p.readline()
     p.close()
+    if x == "Invalid number":
+        client.send_message(message.from_user.id, "Некорректный номер")
+    else:
+        y = (r'https://auto.ru/history/' + x + '/')
 
-    y = (r'https://auto.ru/history/' + x + '/')
+        chromedriver = 'chromedriver'
+        options = webdriver.ChromeOptions()
+        #options.add_argument('headless')
 
-    chromedriver = 'chromedriver'
-    options = webdriver.ChromeOptions()
-    #options.add_argument('headless')
+        browser = webdriver.Chrome(executable_path=chromedriver, options=options)
+        browser.get(y)
 
-    browser = webdriver.Chrome(executable_path=chromedriver, options=options)
-    browser.get(y)
+        time.sleep(15)
+        browser.close()
 
-    time.sleep(15)
-    browser.close()
+        browser = webdriver.Chrome(executable_path=chromedriver, options=options)
+        browser.get(y)
+        time.sleep(1)
+        requiredHtml = browser.page_source
 
-    browser = webdriver.Chrome(executable_path=chromedriver, options=options)
-    browser.get(y)
-    time.sleep(1)
-    requiredHtml = browser.page_source
-
-    soup = BeautifulSoup(requiredHtml, 'html.parser')
-    name = soup.find('div', class_='VinReportPreviewExp__mmm').text
-    msg = client.send_message(message.chat.id, f"Марка: {name}")
-    client.register_next_step_handler(msg, user_answer)
+        soup = BeautifulSoup(requiredHtml, 'html.parser')
+        name = soup.find('div', class_='VinReportPreviewExp__mmm').text
+        msg = client.send_message(message.chat.id, f"Марка: {name}")
+        client.register_next_step_handler(msg, user_answer)
 
 
 client.polling(none_stop=True, interval=0)
