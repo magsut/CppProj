@@ -44,7 +44,7 @@ def get_text_messages(message):
 
 def user_answer(message):
     if message.text == "По Гос Номеру":
-        msg = client.send_message(message.chat.id, "введите номер")
+        msg = client.send_message(message.chat.id, "Введите номер")
 
         client.register_next_step_handler(msg, user_reg)
 
@@ -83,7 +83,16 @@ def user_reg(message):
         soup = BeautifulSoup(requiredHtml, 'html.parser')
         name = soup.find('div', class_='VinReportPreviewExp__mmm').text
         msg = client.send_message(message.chat.id, f"Марка: {name}")
-        client.register_next_step_handler(msg, user_answer)
 
+        probel = name.find(" ")
+        zpt = name.find(",")
+        marka = name[:probel]
+        model = name[probel+1:zpt]
+        if model.find(" ") != -1:
+            model = model[:model.find(" ")] + "_" + model[model.find(" ")+1:]
+        silka = ("https://auto.ru/cars/"+marka.lower()+"/"+model.lower()+"/used/")
+        client.send_message(message.from_user.id, silka)
+        client.register_next_step_handler(msg, user_answer)
+        browser.close()
 
 client.polling(none_stop=True, interval=0)
