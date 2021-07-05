@@ -88,8 +88,22 @@ def user_reg(message):
         zpt = name.find(",")
         marka = name[:probel]
         model = name[probel+1:zpt]
+        print(marka + "\n " + model)
         if model.find(" ") != -1:
             model = model[:model.find(" ")] + "_" + model[model.find(" ")+1:]
+        if marka.find("LADA") != -1:
+            marka = "vaz"
+            probel = model.rfind(')')
+            if probel != -1:
+                model = model[probel+2:]
+            print(probel)
+        if marka.find("Toyota") != -1:
+            if model.find("RAV4") != -1:
+                model = "rav_4"
+        if marka.find("Mazda") != -1:
+            if model.find("CX") != -1:
+                model = model[:model.find('-')] + "_" + model[model.find('-')+1:]
+
         silka = ("https://auto.ru/cars/"+marka.lower()+"/"+model.lower()+"/used/")
         client.send_message(message.from_user.id, silka)
         client.register_next_step_handler(msg, user_answer)
